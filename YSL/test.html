@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			var EHandler = {};
+			/*非ie浏览器函数*/
+			if(document.addEventListener) {
+				/*EHandler的add函数*/
+				EHandler.add = function(element,eType,eFunc){
+					if(eType == "load") {
+						if(typeof window.onload == "function") {
+							/*原始onload事件*/
+							var existingOnload = window.onload;
+							/*对onload事件进行重写*/
+							window.onload = function(){
+								existingOnload();
+								eFunc();
+							}
+						} else {
+							window.onload = eFunc;
+						}
+					} else {
+						element.addEventListener(eType,eFunc,false);
+					}
+				};
+				
+				/*EHandler的remove函数*/
+				EHandler.remove = function(element,eType,eFunc) {
+					element.removeEventListener(eType,eType,eFunc);
+				};
+			}
+			/*ie浏览器增加事件监听函数*/
+			else if(document.attachEvent) {
+				/*ie环境下EHandler的add函数*/
+				EHandler.add = function(element,eType,eFunc) {
+					if(eType == "load") {
+						if(typeof window.onload == "function") {
+							var existingOnload = window.onload;
+							window.onload = function(){
+								existingOnload();
+								eFunc();
+							}
+						} else {
+							window.onload = eFunc;
+						}
+					} else {
+						element.attachEvent("on" + eType,eFunc);
+					}	
+				};
+				
+				/*ie环境下EHandler的remove函数*/
+				EHandler.remove = function(element,eType,eFunc) {
+					element.detachEvent("on"+eType,eFunc);
+				}
+			}
+			
+			/*跨浏览器实例化XMLHttpRequest对象*/
+			function readyAjax(){
+				try{
+					return new XMLHttpRequest();
+				} catch(e) {
+					try{
+						return new ActiveXObject("Msxml2.XMLHTTP");
+					} catch(e) {
+						try{
+							return new ActiveXObject("Microsoft.XMLHTTP");
+						} catch(e) {
+							return alert("you shoule have a new bowser");
+						}
+					}
+				}
+			}
+		</script>
+		
+	</head>
+	<body>
+		<script>
+			var requestObj = readyAjax();
+			var url = "www.baidu.com";
+			requestObj.open("GET",url,true);
+			requestObj.send();
+			if(requestObj.statusText == "200") {
+				alert(requestObj.responseText);
+			} else {
+				alert(requestObj.statusText);
+			}
+		</script>
+	</body>
+</html>

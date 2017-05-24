@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+        <!--博客园老牛大讲堂-->
+        <!--<script src="js/angular.min.js"></script>-->
+        <script src="js/jquery-1.8.2.js"></script>
+        <script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+    </head>
+    <body novalidate>
+        
+        <div ng-app="myApp" ng-controller="myCrtl">
+        <!--
+       	作者：royarn
+       	时间：2017-05-16
+       	描述：控制器练习 & 控制器文件剥离
+       -->
+       <button ng-click="showOrHide()">隐藏</button>
+       <p ng-hide="tmp">
+       <br>
+       	名：<input type="text" ng-model="firstName"/>
+       	姓：<input type="text" ng-model="lastName" />
+       	<p><br>全称：{{ fullName() }}</p>
+       	</p>
+       	
+        <p>输入一个数字: <input type = "number" ng-model = "number" /></p>
+         <button ng-click = "cj()">平方</button>
+         <p>结果: {{ totalNum }}</p>
+       	 </div>
+       	<!--<script src="controller/customersController.js"></script>-->
+       	<!--<script src="controller/cssController.js"></script>-->
+       	<script src="controller/serviceController.js"></script>
+       	
+        <!--<script>
+            //总的来说下面的模块是固定的。跨域就按下面写
+            var app = angular.module('myApp', []);
+            app.controller('myCrtl', function($scope, $http) {-->
+<!--//              var k=$http({
+//                  method:'post',
+//                  url: "http://localhost:8080/Angular/UserServlet",
+//                  data:{id:"1",name:"老牛大讲堂"},
+//                  headers:{'Content-Type': 'application/x-www-form-urlencoded'},
+//                  transformRequest: function(obj) {
+//                      var str = [];
+//                      for(var p in obj){
+//                              str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+//                      }
+//                      return str.join("&");
+//                  },
+//                  responseType:"text"
+//              });
+//              //博客园老牛大讲堂
+//              k.success(function(data){
+//                  console.log(data);//请求后的输出数据
+//              });
+//			$http.get("http://localhost:8080/Angular/UserServlet")
+//			.success(function(resp){
+//				console.log(resp);
+//			});-->
+             <!--});
+        </script>-->
+    </body>
+</html>

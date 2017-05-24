@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script type="text/javascript" src="js/jquery.js" ></script>
+		<script type="text/javascript" src="http://cdn.staticfile.org/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+		<script type="text/javascript" src="js/jquery-1.8.2.js" ></script>
+		<script>
+		/**
+		 * 生成二维码  by lizq_cti_sx
+		 *  //begin
+		 * @param {Object}  str
+		 * 转码函数，兼容汉字
+		 */
+			function utf16to8(str) {
+				var out, i, len, c;
+				out = "";
+				len = str.length;
+				for(i = 0; i < len; i++) {
+					c = str.charCodeAt(i);
+					if((c >= 0x0001) && (c <= 0x007F)) {
+						out += str.charAt(i);
+					} else if(c > 0x007F) {
+						out += String.fromCharCode(0xE0 | ((c >> 12) & 0x0F));
+						out += String.fromCharCode(0x80 | ((c >> 6) & 0x3F));
+            			out += String.fromCharCode(0x80 | ((c >> 0) & 0x3F));
+					} else {
+						out += String.fromCharCode(0xC0 | ((c >> 6) & 0x1F));
+            			out += String.fromCharCode(0x80 | ((c >> 0) & 0x3F));	
+					}
+				}
+				return out;
+			}
+			
+			/**
+			 * 生成二维码函数
+			 * eleid————需要生成二维码div的ID
+			 * rendermethod————渲染方式，table或canvas
+			 * picweight————生成二维码宽度
+			 * picheight————生成二维码高度
+			 * url————内容
+			 */
+			function generateQRCode(eleid,rendermethod,picweight,picheight,url){
+				var domId = document.getElementById(eleid);
+				$(domId).qrcode({
+					render	:	"canvas",	//设置渲染方式
+					width	:	picweight,	//宽度
+					height	:	picheight,	//高度
+					text	:	utf16to8(url), //内容 
+					typeNumber	:	-1,	//计算方式
+					correctLevel	:	2,//纠错等级
+					background      : "#ffffff",	//背景颜色  
+					foreground      : "#000000" 	//前景颜色
+				});
+			}
+			
+			//end
+			
+			function myQRCode(){
+				generateQRCode("QRCODE","table",200,200,"李志强");
+			}
+			
+			/**
+			 * 屏蔽右键   by lizq_cti_sx 
+			 * contextmenu  上下文菜单
+			 */
+			window.onload = function(){
+				$(document).bind("contextmenu",function(e){
+					return false;
+				});
+		}
+			
+			/**
+			 * 屏蔽F12 & 键盘操作监控
+			 */
+			var jq = jQuery.noConflict();//防止$符号与其他冲突  对jquery重命名
+			jq(document).ready(function(){
+				jq("*").keydown(function(e) {
+					//判断按键
+					e = window.event || e || e.which;
+					if(e.keyCode == 122){
+						e.keyCode = 0;
+						alert("F11按键已禁用");
+						return false;
+					}
+				});
+			});
+			
+			/**
+			 * 导出表格到excel
+			 * @author lizq_cti_sx
+			 * 过滤导出列的方法：在第一行需要过滤的列添加class属性“noExport”,若不添加，则默认导出全部列
+			 */
+//			function exportToExcel(tableid) { //读取表格中每个单元到excel
+//				var curTab1 = document.getElementById(tableid);//获取当前表格
+//				var oXL;
+//				
+//				try{
+//					oXL = new ActiveXObject("Excel.Application");//通过ActiveXObject构造函数来启动应用程序	
+//				}catch(e){
+//					//TODO handle the exception  处理异常
+//					alert("启动excel程序失败！");
+//					return false;
+//				}
+//				
+//				var oWB = oXL.Workbooks.Add();//获取Workbook对象
+//				var oSheet = oWB.ActiveSheet;//获取当前sheet
+//				var lenr = curTab1.rows.length;//获取表格行数
+//				for(i = 0; i < lenr; i++) {
+//					var lenc = curTab1.rows(0).cells.length;//获取列数
+//					for(j = 0; k = 0; k < lenc; k++,j++) {
+//						if($(curTab1.rows(0).cells(k)).hasClass("noExport")) {//根据第一行的列属性判断该列是否导出
+//							j--;//不导出则停留当前列等待写入数据
+//						} else {
+//							oSheet.Cells(i + 1, j + 1).value = curTbl.rows(i).cells(k).innerText; 
+//						}
+//					}
+//				}
+//				oXL.Visible = true;//设置excel可见属性
+//			}
+		</script>
+	</head>
+	<body>
+		<button id="begin">开始</button>
+		<button id = "stop" onclick="myQRCode()">生成</button>
+		<div id="QRCODE"></div>
+	</body>
+</html>

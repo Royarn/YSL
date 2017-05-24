@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/Mylib.css">
+		<script type="text/javascript" src="js/jquery-1.8.2.js"></script>
+		<script type="text/javascript" src="Mylib.js"></script>
+		<script type="text/javascript">
+			function show(){
+				console.log("执天之道");
+			}
+		</script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			$(document).ready(show());
+			$(document).ready(function(){
+//				$('#btn').click(function(e){
+//					console.log(this.id);
+//					console.log($(e.target).is('button'));
+//				});
+				
+				$(document).keyup(function(e){
+					//fromCharCode()  --键盘对应输入值的ASC||值
+					var key = String.fromCharCode(e.which);
+					if(key in triggers) {
+						console.log("key："+key+"|||||||||||    "+"value："+triggers[key]+"...."+e.which);
+					}
+				});
+				
+				/*阻止默认操作*/
+				$("#a").click(function(e){
+					e.preventDefault();
+				});
+			});
+			
+		</script>
+		<button id="btn">按钮</button>
+		<script type="text/javascript">
+				$('#btn').click(function(e){
+					console.log(this.id);
+					console.log($(e.target).is('button'));
+				});
+		</script>
+		
+		<script type="text/javascript">
+			$(document).ready(function(){
+				var tmpFunc = outerFunction();
+				tmpFunc.fn1();
+
+			var orderDteatil = new OrderDteatil();
+			var myName = {
+				"addrId":'887',
+				"addrStr":"北京西路128号"
+			};
+			orderDteatil.setAddressNode(myName);
+			
+			var optNbr = new OptNbr();
+			optNbr.setOptId("101234");
+			optNbr.setOptName("天翼彩铃包");
+			optNbr.setOptCode("TY");
+			var optNbr2 = new OptNbr();
+			optNbr2.setOptId("101235");
+			var optNbr3 = new OptNbr();
+			optNbr3.setOptId("101236");
+			var optNbr4 = new OptNbr();
+			optNbr4.setOptId("101237");
+			orderDteatil.addOptNbrNode(optNbr);
+			orderDteatil.addOptNbrNode(optNbr2);
+			orderDteatil.addOptNbrNode(optNbr3);
+			orderDteatil.addOptNbrNode(optNbr4);
+//			console.log(JSON.stringify(orderDteatil));
+//			orderDteatil.delOptNbrById("101236");
+//			orderDteatil.addOptNbrNode(optNbr3);
+//			console.log(JSON.stringify(orderDteatil));
+			
+			/*对象复制要由内到外*/
+			//设置属性值
+			var attrValue1 = new AttrValueClass();
+			attrValue1.setAttrValueId("9001");
+			attrValue1.setAttrValueName("亲情号码1");
+			attrValue1.setAttrValueReal("12345");
+			var attrValue2 = new AttrValueClass();
+			attrValue2.setAttrValueId("9002");
+			attrValue2.setAttrValueName("亲情号码2");
+			attrValue2.setAttrValueReal("234");
+			var attrValue3 = new AttrValueClass();
+			attrValue3.setAttrValueId("9003");
+			attrValue3.setAttrValueName("亲情号码3");
+			attrValue3.setAttrValueReal("34");
+			//设置属性
+			var attrm = new AttrClass();
+			attrm.setAttrId("XXX");
+			attrm.setAttrName_Eh("sdfsdf");
+			attrm.setAttrName_Zh("属性1");
+			attrm.setAttrValue(attrValue1);
+			attrm.setOldAttrValue(attrValue3);
+			var attr1 = new AttrClass();
+			attr1.setAttrId("CCCC");
+			attr1.setAttrName_Eh("ghfgj");
+			attr1.setAttrValue(attrValue2);
+			var attr2 = new AttrClass();
+			attr2.setAttrId("VVVVV");
+			attr2.setAttrName_Zh("属性3");
+			var subProd = new SubProd();
+			subProd.setProdId("100");
+			subProd.setProdName("测试1");
+			subProd.setProdCode("A");
+			subProd.setProdType("1");
+			subProd.addProdAttr(attrm);
+			subProd.addProdAttr(attr1);
+			subProd.addProdAttr(attr2);
+			var subProd2 = new SubProd();
+			subProd2.setProdId("200");
+			subProd2.setProdName("测试2");
+			subProd2.setProdCode("S");
+			subProd2.setProdType("2");
+			var subProd3 = new SubProd();
+			subProd3.setProdId("300");
+			subProd3.setProdName("测试3");
+			subProd3.setProdCode("D");
+			subProd3.setProdType("3");
+			var subProd4 = new SubProd();
+			subProd4.setProdId("400");
+			subProd4.setProdName("测试4");
+			subProd4.setProdCode("F");
+			subProd4.setProdType("4");
+
+			/*将由内而外的数据保存到订单对象中*/
+			orderDteatil.addSubProdNode(subProd);
+			orderDteatil.addSubProdNode(subProd2);
+			orderDteatil.addSubProdNode(subProd3);
+			orderDteatil.addSubProdNode(subProd4);
+			//console.log(JSON.stringify(orderDteatil));
+			
+			/*元素隐式迭代给指定id赋值  --所谓回调函数就是写一个回调函数*/
+			$("button.btn").attr({
+				rel:"external",
+				title:"此乃天道...",
+				id:function(index,oldValue){
+					return "myId-"+index;
+				}
+				});
+				
+			/*测试继承函数*/
+			//var objA = new ClassA("red");
+			//var objB = new ClassB("what the fuck");
+			
+			/*原型链*/
+			var objF = new ClassF();
+			var objS = new ClassS();
+//			objF.attrMethod();
+//			objS.attrMethod();
+//			objS.myMethod();
+//			console.log(ClassF.prototype.__proto__);
+//			objS.__proto__.myAttr = 'lizq';
+//			objS.__proto__.attrMethod();
+//			objS.__proto__.myMethod();
+			
+			/*混合模式*/
+			var x = new subTree("ok,i know it","test...");
+			//console.log(x.__proto__.name);
+			
+			/*更新jquery核心插件库*/
+			var obj = {
+				"key1":"data1",
+				"key2":"data2",
+				"key3":"data3",
+				"key4":"data4",
+			};
+			//var total = $.myFunc(obj);
+			//console.log($.myFunc(obj));
+			
+			/*toggle函数联系*/
+			$("#btn").toggle(function(){
+				console.log(111111111111);
+			},function(){
+				console.log(222222222222);
+			});
+			
+			/*回调函数理解*/
+//			outerFunc("test............",function(obj,res){
+//				console.log(obj);
+//			},function(obj) {
+//				console.log(obj);
+//			});
+
+			/*手动建立闭包*/
+			var files = ['a.txt','b.txt','c.txt'];
+			for(var i=0;i<files.length;i++) {
+				(function(i){
+					loopClose(files[i],"utf-8",function(obj){
+						console.log("传入值："+obj+"、、、、外部变量："+files[i]);
+					});
+				})(i);
+			}
+			
+			/*闭包再次理解*/
+			//console.log(generateClosure());
+			console.log(recursiveFunc(5));
+			
+	});
+		</script>
+		<a href="www.baidu.com" id="a">aaaa</a>
+		
+		<button class="btn" style="background-color: blue;">按钮</button><br>
+		<!--<button class="btn">2</button>-->
+		<button class="btn">3</button>
+		<br>
+		<span> Name：&nbsp;</span><input type="text"/>
+	</body>
+</html>

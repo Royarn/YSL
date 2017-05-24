@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="js/angular.min.js" ></script>
+		<!--<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script> --> 
+	</head>
+	<body>
+		<!--
+        	作者：royarn
+        	时间：2017-05-16
+        	描述： the first angular program
+        		  每个元素都可绑定angular应用程序
+       -->
+       <!--<div ng-app="" >
+       	<input type="text" ng-model="name"/><br>
+		<p>Hello {{name}}</p>
+		<p></p>
+       </div>-->
+       
+       <!--
+       	作者：royarn
+       	时间：2017-05-16
+       	描述：价格计算器
+       -->
+       <!--<div ng-app="" data-ng-init="num=1;price=5">
+       	<h1>价格计算器</h1>
+       	数量：<input type="number" data-ng-model="num" /><br>
+       	价格：<input type="number" data-ng-model="price"/></br>
+       	<p><br>总价：<br>{{num * price}}</p>
+       </div>-->
+       
+       <!--
+       	作者：royarn
+       	时间：2017-05-16
+       	描述：clone html片段  屏蔽这种初始化方式  默认
+       -->
+       <!--<div ng-app="arrlist" ng-controller="circle">
+       	<p>使用 no-repeat 循环对象</p>
+       	<ul>
+       		<li ng-repeat="attr in circle">
+       			{{ attr }}
+       		</li>
+       	</ul>
+       </div>
+       <script>
+       	var app1 = angular.module("arrlist",[]);
+       	app1.controller("circle",function($scope) {
+       		$scope.name = 'lizq';
+       		$scope.age = '28';
+       		$scope.height = '178';
+       	});
+       </script>-->
+       
+       <!--
+       	作者：royarn
+       	时间：2017-05-16
+       	描述：数据双向绑定
+       -->
+       <div ng-app="myApp" ng-controller="myCrtl">
+       	<p>用户名：</p>
+       	<input type="text" ng-model="name"/><br>
+       	<h3>您输入的值为：{{name}}</h3>
+       	
+       	<!--
+           	作者：royarn
+           	时间：2017-05-16
+           	描述：循环联系
+           -->
+       	<ul>
+       		<li ng-repeat="tmp in items"> {{ tmp }}</li>
+       	</ul>
+       
+        
+        <!--
+       	作者：royarn
+       	时间：2017-05-16
+       	描述：控制器练习 & 控制器文件剥离
+       -->
+       	名：<input type="text" ng-model="firstName"/>
+       	姓：<input type="text" ng-model="lastName" />
+       	<p><br>全称：{{ fullName() }}</p>
+       	
+       	<!--
+           	作者：royarn
+           	时间：2017-05-16
+           	描述：字符转换
+           -->
+       	<p>uplowercase：{{ lastName | uppercase }}</p>
+       	<p>lowercase：{{ lastName | lowercase }}</p>
+       	
+       	<!--
+       	作者：royarn
+       	时间：2017-05-16
+       	描述：价格计算器
+       -->
+       	<h1>价格计算器</h1>
+       	数量：<input type="number" data-ng-model="num" /><br>
+       	价格：<input type="number" data-ng-model="price"/></br>
+       	<p><br>总价：{{num * price}}</p>
+       	<p><br>价格自动转换：{{num * price|currency}}</p>
+       	
+       	<!--
+           	作者：royarn
+           	时间：2017-05-16
+           	描述：字符串反转
+           -->
+       	<h3>实际输出：{{realStr|reverse}}</h3>
+       	<h5>时间：{{1490161945000 | date:"yyyy-MM-dd HH:mm:ss"}}</h5>
+       	
+       	       	<!--
+           	作者：royarn
+           	时间：2017-05-16
+           	描述：函数调用方式
+          -->
+        <!--<button type="button" >点我</button>
+        <h3>{{ greeting }}</h3>-->
+       	
+       </div>
+       
+       <script src="controller/listController.js"></script>
+       
+       <script src="controller/personContriller.js"></script>
+       
+       <script src="controller/filterController.js"></script>
+       <script src="controller/customersController.js"></script>
+	</body>
+</html>
